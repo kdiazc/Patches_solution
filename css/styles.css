@@ -94,6 +94,7 @@ nav ul li a{
     top: 70%;
     font-family: 'Montserrat', sans-serif;
     border-radius: 10px;
+    border: none;
     padding: 7px;
     color: #ffff;
     background: linear-gradient(90deg, rgba(203,0,151,1) 0%, rgba(255,87,32,1) 100%);
