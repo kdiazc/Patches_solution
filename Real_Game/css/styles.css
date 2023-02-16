@@ -213,4 +213,13 @@ h4{
 }
 
 
+#hint-id{
+    position: absolute;
+    border: 2px solid black;
+    height: 200px;
+    width: 300px;
+    top:100px;
+}
+
+
 
