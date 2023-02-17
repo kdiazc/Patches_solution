@@ -30,24 +30,58 @@
     <p class="description"> All the words or phrases are related to the management of ICT projects, below you can find the definitions</p>
     <button class="boton">By: Karen Diaz</button>
 
-    <div id="hint-id"></div>
+    <div id="hint-id">
+        <p><b>Click here for a FREE hint!</b></p>
+    </div>
 
     <div class="table-container">
         <a id="game"></a>
     <table class="default">
         <tr>
-            <td class="infrastructure"> <a py-click="display_hint('infrastructure')" id="infrastructure-1"> I </a></td>
+            <td py-click="write_to_page('infrastructure')" id="infrastructure-1">  I </td>
+            <td py-click="write_to_page('authority')" id="authority-1">  A </td>
         </tr>
     </table>
 
     <py-script>
-    def write_to_page(id):
-      manual_div = Element("manual-write")
-      manual_div.element.innerHTML = f"<p><b>Hello World {id}</b></p>"
+        from js import document
 
-    def display_to_div(id):
-      display("", target="display-write")
-      display("I display things!"+id, target="display-write")
+        def write_to_page(word_key, color=None):
+
+            data = {
+                    "infrastructure":"blblbllblblblblb",
+                    "authority":"uyuyuyuyuyuyuyuyuyuy"
+                    }
+
+            def_container = document.getElementById("hint-id")
+
+            letter_pos = None
+
+            if not color:
+                color = "black"
+            
+            if '-' in word_key:
+                letter_cell = document.getElementById(word_key)
+                word_key, letter_pos = word_key.split('-')
+                
+
+            current_definition = data[word_key]
+
+
+            if current_definition == def_container.innerText:
+                def_container.style.color = "black"
+                def_container.innerHTML = "<p><b>Click here for a FREE hint!</b></p>"
+                if letter_pos:
+                    letter_cell.style.backgroundColor = "white"
+                    letter_cell.style.color = "black"
+            else:
+                def_container.innerHTML = f"<p><b>{current_definition}</b></p>"
+                if letter_pos:
+                    def_container.style.color = color
+                    letter_cell.style.color = "white"
+                    letter_cell.style.backgroundColor = color
+
+
     </py-script>
   </body>
 </html>
