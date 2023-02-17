@@ -29,7 +29,7 @@
     <h2 class="title"> Patchwords word seek on ICT Project Management</h2>
     <p class="description"> All the words or phrases are related to the management of ICT projects, below you can find the definitions</p>
     <button class="boton">By: Karen Diaz</button>
-    <div class="description4" id="hint-id">Click a letter to get a FREE hint!</div>
+    <div class="description4" id="hint-id"> <p class="description5">Click here for a FREE hint!</p></div>
     </div>
 
     <table class="default">
@@ -298,9 +298,11 @@
 
     <py-script>
 
+        from js import document
+
         data = {
             "infrastructure":"Consists of existing facilities, equipment, organizational and telecommunications channels, information technology hardware, availability, and capacity",
-            "authority":"balbalbaljalbalsnoihfeoihfoafmeencantanlasnalgasdeminoviaaaanoifeboiqoadnoi",
+            "authority":"The condition of having the right, within a given context, to make relevant decisions, establish or improve procedures, apply project resources, expend funds, or give approvals.",
             "systembehavior":"System behavior is the result of dynamic interdependencies within and among project elements. For example, the integration of different technology systems may cause threats that could impact project outcomes and success.",
             "push":"Communication sent to stakeholders such as memos, emails, status reports, voice mail, and so forth, is used for one-way communications with individual stakeholders or groups of stakeholders.",
             "pull":"Information sought by the stakeholder, such as a project team member going to an intranet to find communication policies or templates, running internet searches, and using online repositories.",
@@ -322,9 +324,37 @@
         
         }
 
+        def display_hint(word_key, color=None):
 
-        def display_hint(class_name):
-          display(data[class_name], target="hint-id")
+            def_container = document.getElementById("hint-id")
+
+            letter_pos = None
+
+            if not color:
+                color = "black"
+            
+            if '-' in word_key:
+                letter_cell = document.getElementById(word_key)
+                word_key, letter_pos = word_key.split('-')
+                
+
+            current_definition = data[word_key]
+
+
+            if current_definition == def_container.innerText:
+                def_container.style.color = "black"
+                def_container.innerHTML = '<p class="description5">Click here for a FREE hint!</p>'
+                if letter_pos:
+                    letter_cell.style.backgroundColor = "white"
+                    letter_cell.style.color = "black"
+            else:
+                def_container.innerHTML = f'<p class="description5">{current_definition}</p>'
+                if letter_pos:
+                    def_container.style.color = color
+                    letter_cell.style.color = "white"
+                    letter_cell.style.backgroundColor = color
+
+
     </py-script>
 
 </body>
